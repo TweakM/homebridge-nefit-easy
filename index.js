@@ -67,7 +67,7 @@ function NefitEasyAccessory(log, config) {
 
   this.service
     .getCharacteristic(Characteristic.TargetHeatingCoolingState)
-    .on('get', (callback) => callback(null, Characteristic.TargetHeatingCoolingState.HEAT))
+    .on('get', this.getTargetState.bind(this))
     .setProps(
       {validValues: [Characteristic.TargetHeatingCoolingState.OFF,
                      Characteristic.TargetHeatingCoolingState.HEAT]
@@ -142,6 +142,24 @@ NefitEasyAccessory.prototype.getCurrentState = function(callback) {
     return callback(e);
   });
 };
+
+NefitEasyAccessory.prototype.getTargetState = function(callback) {
+  this.log.debug('Getting target state..');
+
+  deviceClient.status(true).then((status) => {
+    var state     = status['boiler indicator'];
+    var isHeating = state === 'central heating';
+    this.log.debug('...target state is', state);
+    return callback(null,
+      isHeating ? Characteristic.TargetHeatingCoolingState.HEAT :
+                  Characteristic.TargettHeatingCoolingState.OFF
+    );
+  }).catch((e) => {
+    console.error(e);
+    return callback(e);
+  });
+};
+
 
 NefitEasyAccessory.prototype.getServices = nefitEasyServices;
 
