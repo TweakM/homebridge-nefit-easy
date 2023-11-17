@@ -67,8 +67,8 @@ function NefitEasyAccessory(log, config) {
 
   this.service
     .getCharacteristic(Characteristic.TargetHeatingCoolingState)
-    .on('get', (callback) => callback(null, Characteristic.TargetHeatingCoolingState.AUTO))
-    .setProps({validValues: [Characteristic.TargetHeatingCoolingState.AUTO]});
+    .on('get', (callback) => callback(null, Characteristic.TargetHeatingCoolingState.HEAT))
+    .setProps({validValues: [Characteristic.TargetHeatingCoolingState.HEAT]});
 };
 
 const nefitEasyGetTemp = function(type, prop, skipOutdoor, callback) {
