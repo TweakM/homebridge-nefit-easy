@@ -39,7 +39,7 @@ function NefitEasyAccessory(log, config) {
 
   // Establish connection with device.
   deviceClient.connect().catch((e) => {
-    throw error(e);
+    throw Error(e);
   });
 
   this.service
@@ -183,7 +183,7 @@ function NefitEasyAccessoryOutdoorTemp(log, config) {
 
   // Establish connection with device.
   deviceClient.connect().catch((e) => {
-    throw error(e);
+    throw Error(e);
   });
 
   this.service
