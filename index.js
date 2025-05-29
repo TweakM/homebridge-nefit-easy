@@ -152,7 +152,7 @@ NefitEasyAccessory.prototype.getTargetState = function(callback) {
     this.log.debug('...target state is', state);
     return callback(null,
       isHeating ? Characteristic.TargetHeatingCoolingState.HEAT :
-                  Characteristic.TargettHeatingCoolingState.OFF
+                  Characteristic.TargetHeatingCoolingState.OFF
     );
   }).catch((e) => {
     console.error(e);
